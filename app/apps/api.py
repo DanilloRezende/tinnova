@@ -112,3 +112,26 @@ def find_factorial(request, n: int):
     
     except Exception as e:
         raise HttpError(500, f"Error to find factorial: {str(e)}")
+
+def sum_multiples(n, value):
+    quantity = (value - 1 ) // n
+    return n * quantity * (quantity + 1) // 2 
+
+@router.get("/add_when_multiple_for_3_or_5/{value}", summary="Sum of all multiple from 3 or 5")
+def find_sum(request, value: int):
+    try:
+        if value < 0:
+            raise HttpError(400, "Can't use negative numbers.")
+        
+        sum_values = sum_multiples(3, value) + sum_multiples(5, value) - sum_multiples(15, value)
+
+        return {
+            "value": value,
+            "sum": sum_values,
+            "description": f"Soma dos múltiplos de 3 e 5 abaixo de {value}"
+        }
+    
+    except HttpError:
+        raise
+    except Exception as e:
+        raise HttpError(500, f"Error when calculate the sum.")
