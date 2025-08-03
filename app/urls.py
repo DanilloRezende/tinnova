@@ -1,15 +1,14 @@
-from app.apps.api import router as voting_router
+from app.apps.api import router as teste_tinnova
 from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
 
 api = NinjaAPI(
-    title="API de Votação",
+    title="Teste Tinnova",
     version="1.0",
-    description="API para cálculo de votos"
 )
 
-api.add_router("/voting/", voting_router)
+api.add_router("/teste_tinnova/", teste_tinnova)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
